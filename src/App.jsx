@@ -1,7 +1,8 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { TasksTable } from 'components/TasksTable';
 import React, { useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import './App.css';
 import { fetchData } from './blockchainApi';
 import { Toolbar } from './components/Toolbar.jsx';
 
@@ -17,6 +18,11 @@ const App = () => {
       <Row>
         <Col>
           <Toolbar />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <TasksTable />
         </Col>
       </Row>
     </Container>

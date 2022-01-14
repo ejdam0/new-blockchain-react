@@ -22,6 +22,7 @@ async function addTasksToStore(taskCount, taskList, dispatch) {
     const appTask = {
       id: taskFromContract.id,
       taskName: taskFromContract.taskName,
+      progress: parseInt(taskFromContract.progress),
       isDone: taskFromContract.isDone,
     };
     tasksList = [...tasksList, appTask];

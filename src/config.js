@@ -1,4 +1,4 @@
-export const TASK_LIST_ADDRESS = "0x3124B32c5F830C4B84DF31b54004991570121BFC";
+export const TASK_LIST_ADDRESS = "0x6DCd951aCD1C9cb10Fc8bFf40EEf1484ec539bEA";
 
 export const TASK_LIST_ABI = [
   {
@@ -61,6 +61,25 @@ export const TASK_LIST_ABI = [
       },
       {
         indexed: false,
+        internalType: "uint256",
+        name: "progress",
+        type: "uint256",
+      },
+    ],
+    name: "TaskProgressUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "id",
+        type: "uint256",
+      },
+      {
+        indexed: false,
         internalType: "string",
         name: "content",
         type: "string",
@@ -88,6 +107,11 @@ export const TASK_LIST_ABI = [
         internalType: "string",
         name: "taskName",
         type: "string",
+      },
+      {
+        internalType: "uint256",
+        name: "progress",
+        type: "uint256",
       },
       {
         internalType: "bool",
@@ -140,6 +164,24 @@ export const TASK_LIST_ABI = [
       },
     ],
     name: "updateTask",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_progress",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_taskIndex",
+        type: "uint256",
+      },
+    ],
+    name: "updateProgress",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

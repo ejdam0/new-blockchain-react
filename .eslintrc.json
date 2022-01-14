@@ -1,8 +1,10 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "es6": true
   },
+  "parser": "@babel/eslint-parser",
   "extends": ["plugin:react/recommended", "google"],
   "parserOptions": {
     "ecmaFeatures": {
@@ -16,8 +18,13 @@
     "indent": 0,
     "object-curly-spacing": 0,
     "linebreak-style": 0,
+    "quotes": 0,
+    "max-len": 0,
     "react/prop-types": "off",
     "no-unused-vars": 0,
-    "no-undef": 0
+    "no-undef": 0,
+    "require-jsdoc": 0,
+    "comma-dangle": 0,
+    "requireConfigFile": "false"
   }
 }

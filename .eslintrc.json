@@ -1,7 +1,10 @@
 {
+  "parser": "@babel/eslint-parser",
   "env": {
     "browser": true,
-    "es2021": true
+    "es6": true,
+    "commonjs": true,
+    "node": true
   },
   "extends": ["eslint:recommended", "plugin:react/recommended"],
   "parserOptions": {
@@ -15,6 +18,7 @@
   "rules": {
     "react/prop-types": "off",
     "no-unused-vars": 0,
-    "no-undef": 0
+    "no-undef": 0,
+    "requireConfigFile": false
   }
 }

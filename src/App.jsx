@@ -1,18 +1,14 @@
-import React, { useEffect, useState } from "react";
-import Web3 from "web3";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import "./App.css";
+import { fetchData } from "./blockchainApi";
 
 const App = () => {
-  const [account, setAccount] = useState();
+  const dispatch = useDispatch()
+  const account = useSelector(state => state.appReducer.account)
+
   useEffect(() => {
-    async function load() {
-      const web3 = new Web3(Web3.givenProvider || "http://localhost:7545");
-      const accounts = await web3.eth.requestAccounts();
-
-      setAccount(accounts[0]);
-    }
-
-    load();
+    fetchData(dispatch);
   }, []);
   return <div>This is your account: {account}</div>;
 };

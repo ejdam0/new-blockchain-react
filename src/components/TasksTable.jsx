@@ -1,7 +1,11 @@
 import React from 'react';
 import { Container, Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import '../assets/TaskTable.css';
+import { TaskDoneCheckbox } from './TaskDoneCheckbox';
 import { TaskProgress } from './TaskProgress';
+import { TaskRename } from './TaskRename';
+
 
 export const TasksTable = () => {
     const tasks = useSelector((state) => state.appReducer.tasks);
@@ -21,11 +25,11 @@ export const TasksTable = () => {
                 <tbody>
                     {tasks.map((task, idx) => {
                         return (
-                            <tr key={idx} >
+                            <tr key={idx} className="middle-contents">
                                 <td>{task.id}</td>
-                                <td>{task.taskName}</td>
-                                <td><TaskProgress progress={task.progress} /></td>
-                                <td>{task.isDone}</td>
+                                <td><TaskRename taskName={task.taskName} id={task.id} /></td>
+                                <td><TaskProgress progress={task.progress} id={task.id} /></td>
+                                <td><TaskDoneCheckbox isDone={task.isDone} id={task.id} /></td>
                             </tr>
                         );
                     })}

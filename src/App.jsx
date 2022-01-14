@@ -3,7 +3,7 @@ import { TasksTable } from 'components/TasksTable';
 import React, { useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { fetchData } from './blockchainApi';
+import { fetchData } from './api/blockchainApi';
 import { Toolbar } from './components/Toolbar.jsx';
 
 const App = () => {

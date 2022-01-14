@@ -1,6 +1,6 @@
 import Web3 from "web3";
-import { TASK_LIST_ABI, TASK_LIST_ADDRESS } from "./config";
-import { addTask, setAccount, setTaskCount } from "./store/AppReducer";
+import { TASK_LIST_ABI, TASK_LIST_ADDRESS } from "../config";
+import { addTask, setAccount, setTaskCount } from "../store/AppReducer";
 
 export const fetchData = async (dispatch) => {
   const web3 = new Web3(Web3.givenProvider || "http://localhost:7545");

@@ -1,24 +1,23 @@
 {
-  "parser": "@babel/eslint-parser",
   "env": {
     "browser": true,
-    "es6": true,
-    "commonjs": true,
-    "node": true
+    "es2021": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": ["plugin:react/recommended", "google"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaversion": 12,
+    "ecmaVersion": 13,
     "sourceType": "module"
   },
   "plugins": ["react"],
   "rules": {
+    "indent": 0,
+    "object-curly-spacing": 0,
+    "linebreak-style": 0,
     "react/prop-types": "off",
     "no-unused-vars": 0,
-    "no-undef": 0,
-    "requireConfigFile": false
+    "no-undef": 0
   }
 }

@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Container, Form, Row } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { renameTask } from 'store/AppReducer';
 import '../assets/TaskRename.css';
 
 export const TaskRename = (props) => {
     const [inputValue, setInputValue] = useState('');
     const [disabled, setDisabled] = useState(true);
+
+    const account = useSelector((state) => state.appReducer.account);
     const dispatch = useDispatch();
 
     useEffect(() => {
         setInputValue(props.task.taskName);
-    }, [props.task.taskName]);
+    }, [props.task]);
 
     const handleChangeInput = (value) => {
         const inputValue = value.target.value;
@@ -18,7 +21,7 @@ export const TaskRename = (props) => {
     };
 
     const handleChangeTaskName = () => {
-        // TODO dispatch and update props.id, inputValue, props.recentlyCreated
+        renameTask(dispatch, props.task.id, inputValue, account);
         setDisabled(true);
     };
     return (
@@ -32,20 +35,12 @@ export const TaskRename = (props) => {
                 />
             </Row>
             <Row>
-                {props.task.isRecentlyCreated ?
-                    <Button
-                        className="center-button"
-                        size="sm"
-                        onClick={() => setDisabled(false)}>
-                        Zapisz
-                    </Button> :
-                    <Button
-                        className="center-button"
-                        size="sm"
-                        onClick={() => setDisabled(false)}>
-                        Zmień zadanie
-                    </Button>
-                }
+                <Button
+                    className="center-button"
+                    size="sm"
+                    onClick={() => setDisabled(false)}>
+                    Zmień zadanie
+                </Button>
             </Row>
         </Container >
     );

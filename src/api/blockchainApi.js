@@ -2,16 +2,36 @@ import Web3 from "web3";
 import { TASK_LIST_ABI, TASK_LIST_ADDRESS } from "../config";
 import { addTask, setAccount, setTaskCount } from "../store/AppReducer";
 
-export const fetchData = async (dispatch) => {
-  const web3 = new Web3(Web3.givenProvider || "http://localhost:7545");
+const web3 = new Web3(Web3.givenProvider || "http://localhost:7545");
+const taskList = new web3.eth.Contract(TASK_LIST_ABI, TASK_LIST_ADDRESS);
+
+export const createTask = async (taskName, account) => {
+  return taskList.methods.createTask(taskName).send({ from: account });
+};
+
+export const alterTaskName = async (taskId, taskName, account) => {
+  return taskList.methods.updateTask(taskName, taskId).send({ from: account });
+};
+
+export const alterTaskProgress = async (taskId, progress, account) => {
+  return taskList.methods
+    .updateProgress(progress, taskId)
+    .send({ from: account });
+};
+
+export const alterTaskCompletion = async (taskId, account) => {
+  return taskList.methods.toggleTaskCompletion(taskId).send({ from: account });
+};
+
+export const fetchAccountData = async (dispatch) => {
   const accounts = await web3.eth.requestAccounts();
   dispatch(setAccount(accounts[0]));
+  fetchTaskData(dispatch);
+};
 
-  // inicjalizacja kontraktu przy użyciu abi i adres
-  const taskList = new web3.eth.Contract(TASK_LIST_ABI, TASK_LIST_ADDRESS);
+export const fetchTaskData = async (dispatch) => {
   const taskCount = await taskList.methods.getTaskCount().call();
   dispatch(setTaskCount(parseInt(taskCount)));
-
   await addTasksToStore(taskCount, taskList, dispatch);
 };
 

@@ -18,9 +18,9 @@ contract TaskList {
     mapping(uint256 => Task) public tasks;
 
     constructor() {
-        createTask("First task");
-        createTask("Second task");
-        createTask("Third task");
+        createTask("Zadanie 1");
+        createTask("Zadanie 2");
+        createTask("Zadanie 3");
     }
 
     function getTaskCount() public view returns (uint256) {

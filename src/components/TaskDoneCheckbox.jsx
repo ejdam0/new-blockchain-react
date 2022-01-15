@@ -1,31 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeTaskCompletion } from '../store/AppReducer';
 
 export const TaskDoneCheckbox = (props) => {
     const [checked, setChecked] = useState(false);
 
+    const account = useSelector((state) => state.appReducer.account);
     const dispatch = useDispatch();
 
     useEffect(() => {
         setChecked(props.task.isDone);
-    }, [props.task.isDone]);
+    }, [props.task]);
 
     const handleToggleTaskCompletion = () => {
-        setChecked(!checked);
-        // todo dispatch toggle completion, update, props.task.id, checked
+        changeTaskCompletion(dispatch, props.task.id, !checked, account);
     };
 
     return (
-        <>
-            {props.task.isRecentlyCreated ?
-                null :
-                <Form.Check
-                    checked={checked}
-                    label="Zadanie wykonane"
-                    onChange={() => handleToggleTaskCompletion()}
-                />
-            }
-        </>
+        <Form.Check
+            checked={checked}
+            label="Zadanie wykonane"
+            onChange={() => handleToggleTaskCompletion()}
+        />
     );
 };

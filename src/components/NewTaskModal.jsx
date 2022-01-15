@@ -3,11 +3,13 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsNewTaskModalOpen } from 'store/AppReducer';
 import '../assets/TaskTable.css';
+import { addNewTask } from '../store/AppReducer';
 
 export const NewTaskModal = () => {
     const [inputValue, setInputValue] = useState('');
 
     const isModalOpen = useSelector((state) => state.appReducer.isNewTaskModalOpen);
+    const account = useSelector((state) => state.appReducer.account);
     const dispatch = useDispatch();
 
     const handleClose = () => dispatch(setIsNewTaskModalOpen(false));
@@ -17,11 +19,9 @@ export const NewTaskModal = () => {
     };
 
     const handleSave = () => {
-        // TODO dispatch new task
-        // todo then reload all tasks
+        addNewTask(dispatch, inputValue, account);
         handleClose();
     };
-
 
     return (
         <Modal
@@ -34,7 +34,6 @@ export const NewTaskModal = () => {
             <Modal.Body>
                 <Form.Control
                     onChange={(value) => handleChangeInput(value)}
-                    onBlur={() => handleChangeTaskName()}
                     value={inputValue}
                 />
             </Modal.Body>

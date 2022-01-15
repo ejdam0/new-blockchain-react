@@ -6,7 +6,6 @@ import { TaskDoneCheckbox } from './TaskDoneCheckbox';
 import { TaskProgress } from './TaskProgress';
 import { TaskRename } from './TaskRename';
 
-
 export const TasksTable = () => {
     const tasks = useSelector((state) => state.appReducer.tasks);
 

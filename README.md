@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Getting Started with Task List App
 
 This application was made as a part of master's thesis. The web application allows the user to manage his tasks list. It is possible to
 

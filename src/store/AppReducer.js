@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { AppState } from "../entities/AppState";
 
-const initialState: AppState = {
+const initialState = {
   darkStyle: false,
   account: "",
   taskCount: 0,

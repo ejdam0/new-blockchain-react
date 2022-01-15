@@ -10,7 +10,7 @@ export const fetchData = async (dispatch) => {
   // inicjalizacja kontraktu przy użyciu abi i adres
   const taskList = new web3.eth.Contract(TASK_LIST_ABI, TASK_LIST_ADDRESS);
   const taskCount = await taskList.methods.getTaskCount().call();
-  dispatch(setTaskCount(taskCount));
+  dispatch(setTaskCount(parseInt(taskCount)));
 
   await addTasksToStore(taskCount, taskList, dispatch);
 };

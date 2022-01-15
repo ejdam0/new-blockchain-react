@@ -6,11 +6,10 @@ import '../assets/TaskRename.css';
 export const TaskRename = (props) => {
     const [inputValue, setInputValue] = useState('');
     const [disabled, setDisabled] = useState(true);
-
+    console.log(props);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(props.taskName);
         setInputValue(props.taskName);
     }, [props.taskName]);
 
@@ -20,14 +19,14 @@ export const TaskRename = (props) => {
     };
 
     const handleChangeTaskName = () => {
-        // TODO dispatch and update props.id, inputValue
+        // TODO dispatch and update props.id, inputValue, props.recentlyCreated
         setDisabled(true);
     };
     return (
         <Container>
             <Row>
                 <Form.Control
-                    disabled={disabled}
+                    disabled={props.isRecentlyCreated ? false : disabled}
                     onChange={(value) => handleChangeInput(value)}
                     onBlur={() => handleChangeTaskName()}
                     value={inputValue}

@@ -12,7 +12,7 @@ export const TasksTable = () => {
     const isDarkStyle = useSelector((state) => state.appReducer.darkStyle);
 
     return (
-        <Container style={{ marginTop: "5rem" }}>
+        <Container style={{ marginTop: "1rem" }}>
             <Table striped bordered hover responsive variant={isDarkStyle ? 'dark' : ''}>
                 <thead>
                     <tr>
@@ -27,7 +27,7 @@ export const TasksTable = () => {
                         return (
                             <tr key={idx} className="middle-contents">
                                 <td>{task.id}</td>
-                                <td><TaskRename taskName={task.taskName} id={task.id} /></td>
+                                <td><TaskRename taskName={task.taskName} isRecentlyCreated={task.isRecentlyCreated} id={task.id} /></td>
                                 <td><TaskProgress progress={task.progress} id={task.id} /></td>
                                 <td><TaskDoneCheckbox isDone={task.isDone} id={task.id} /></td>
                             </tr>

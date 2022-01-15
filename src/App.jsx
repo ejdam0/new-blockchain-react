@@ -3,12 +3,13 @@ import { NewTaskModal } from 'components/NewTaskModal';
 import { TasksTable } from 'components/TasksTable';
 import React, { useEffect } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setIsNewTaskModalOpen } from 'store/AppReducer';
 import { fetchAccountData, fetchTaskData } from './api/blockchainApi';
 import { Toolbar } from './components/Toolbar.jsx';
 
 const App = () => {
+  const account = useSelector((state) => state.appReducer.account);
   const dispatch = useDispatch();
   useEffect(() => {
     fetchAccountData(dispatch);
@@ -32,7 +33,7 @@ const App = () => {
         <Col>
           <Button
             style={{ marginTop: "5rem", float: "right" }}
-            onClick={() => fetchTaskData(dispatch)}>
+            onClick={() => fetchTaskData(dispatch, account)}>
             Odśwież listę
           </Button>
         </Col>

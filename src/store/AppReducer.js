@@ -74,7 +74,7 @@ const isTaskAlreadyInStore = (state, action) => {
 
 export const renameTask = (dispatch, taskId, taskName, account) => {
   dispatch(updateTaskName({ id: taskId, taskName: taskName }));
-  alterTaskName(taskId, taskName, account).then(() => fetchTaskData(dispatch));
+  alterTaskName(taskId, taskName, account);
 };
 
 export const changeTaskProgress = (
@@ -87,10 +87,8 @@ export const changeTaskProgress = (
   dispatch(updateTaskProgress({ id: taskId, progress: progress }));
   alterTaskProgress(taskId, progress, account);
   if (progress === 100 && !isDone) {
-    alterTaskCompletion(taskId, account);
     dispatch(toggleTaskCompletion({ id: taskId }));
   } else if (isDone) {
-    alterTaskCompletion(taskId, account);
     dispatch(toggleTaskCompletion({ id: taskId }));
   }
 };
@@ -108,5 +106,5 @@ export const changeTaskCompletion = (dispatch, taskId, isDone, account) => {
 };
 
 export const addNewTask = (dispatch, taskName, account) => {
-  createTask(taskName, account).then(() => fetchTaskData(dispatch));
+  createTask(taskName, account).then(() => fetchTaskData(dispatch, account));
 };

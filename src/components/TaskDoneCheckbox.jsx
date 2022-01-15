@@ -8,19 +8,24 @@ export const TaskDoneCheckbox = (props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setChecked(props.isDone);
-    }, [props.isDone]);
+        setChecked(props.task.isDone);
+    }, [props.task.isDone]);
 
     const handleToggleTaskCompletion = () => {
         setChecked(!checked);
-        // todo dispatch toggle completion, update, props.id, checked
+        // todo dispatch toggle completion, update, props.task.id, checked
     };
 
     return (
-        <Form.Check
-            checked={checked}
-            label="Zadanie wykonane"
-            onChange={() => handleToggleTaskCompletion()}
-        />
+        <>
+            {props.task.isRecentlyCreated ?
+                null :
+                <Form.Check
+                    checked={checked}
+                    label="Zadanie wykonane"
+                    onChange={() => handleToggleTaskCompletion()}
+                />
+            }
+        </>
     );
 };

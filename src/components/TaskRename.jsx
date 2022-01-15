@@ -6,12 +6,11 @@ import '../assets/TaskRename.css';
 export const TaskRename = (props) => {
     const [inputValue, setInputValue] = useState('');
     const [disabled, setDisabled] = useState(true);
-    console.log(props);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setInputValue(props.taskName);
-    }, [props.taskName]);
+        setInputValue(props.task.taskName);
+    }, [props.task.taskName]);
 
     const handleChangeInput = (value) => {
         const inputValue = value.target.value;
@@ -26,19 +25,27 @@ export const TaskRename = (props) => {
         <Container>
             <Row>
                 <Form.Control
-                    disabled={props.isRecentlyCreated ? false : disabled}
+                    disabled={props.task.isRecentlyCreated ? false : disabled}
                     onChange={(value) => handleChangeInput(value)}
                     onBlur={() => handleChangeTaskName()}
                     value={inputValue}
                 />
             </Row>
             <Row>
-                <Button
-                    className="center-button"
-                    size="sm"
-                    onClick={() => setDisabled(false)}>
-                    Zmień zadanie
-                </Button>
+                {props.task.isRecentlyCreated ?
+                    <Button
+                        className="center-button"
+                        size="sm"
+                        onClick={() => setDisabled(false)}>
+                        Zapisz
+                    </Button> :
+                    <Button
+                        className="center-button"
+                        size="sm"
+                        onClick={() => setDisabled(false)}>
+                        Zmień zadanie
+                    </Button>
+                }
             </Row>
         </Container >
     );

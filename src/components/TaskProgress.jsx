@@ -9,8 +9,8 @@ export const TaskProgress = (props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setInputValue(props.progress);
-    }, [props.progress]);
+        setInputValue(props.task.progress);
+    }, [props.task.progress]);
 
     const handleValidateAndChangeInput = (value) => {
         const inputValue = value.target.value;
@@ -23,35 +23,39 @@ export const TaskProgress = (props) => {
     };
 
     const handleChangeProgress = () => {
-        // TODO dispatch and update props.id, inputValue
+        // TODO dispatch and update props.task.id, inputValue
     };
 
     return (
-        <Stack>
-            <Container>
-                <Row style={{ marginBottom: "1rem", width: "50%" }}>
-                    <Form.Label>Zmień postęp</Form.Label>
-                    <Form.Control
-                        onChange={(value) => handleValidateAndChangeInput(value)}
-                        onBlur={() => handleChangeProgress()}
-                        type="number"
-                        value={inputValue}
-                        isInvalid={invalid}
-                    />
-                </Row>
-            </Container>
-            <Container>
-                {props.progress === 0 ?
-                    <Row>
-                        <Alert variant="danger">
-                            Brak postępu w zadaniu!
-                        </Alert>
-                    </Row> :
-                    <Row style={{ marginBottom: "1rem" }}>
-                        <ProgressBar animated now={props.progress} label={`${props.progress}%`} variant={props.progress === 0 ? "danger" :
-                            props.progress === 0 ? "success" : ""} />
-                    </Row>
-                } </Container>
-        </Stack>
+        <>
+            {props.task.isRecentlyCreated ?
+                null :
+                <Stack>
+                    <Container>
+                        <Row style={{ marginBottom: "1rem", width: "50%" }}>
+                            <Form.Label>Zmień postęp</Form.Label>
+                            <Form.Control
+                                onChange={(value) => handleValidateAndChangeInput(value)}
+                                onBlur={() => handleChangeProgress()}
+                                type="number"
+                                value={inputValue}
+                                isInvalid={invalid}
+                            />
+                        </Row>
+                    </Container>
+                    <Container>
+                        {props.task.progress === 0 ?
+                            <Row>
+                                <Alert variant="danger">
+                                    Brak postępu w zadaniu!
+                                </Alert>
+                            </Row> :
+                            <Row style={{ marginBottom: "1rem" }}>
+                                <ProgressBar animated now={props.task.progress} label={`${props.task.progress}%`} variant={props.task.progress === 0 ? "danger" :
+                                    props.task.progress === 0 ? "success" : ""} />
+                            </Row>
+                        } </Container>
+                </Stack>}
+        </>
     );
 };

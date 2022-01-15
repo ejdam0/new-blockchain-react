@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  darkStyle: false,
+  isNewTaskModalOpen: false,
   account: "",
   taskCount: 0,
   tasks: [],
@@ -11,8 +11,8 @@ export const appSlice = createSlice({
   name: "app",
   initialState: initialState,
   reducers: {
-    setDarkAppStyle: (state, action) => {
-      state.darkStyle = action.payload;
+    setIsNewTaskModalOpen: (state, action) => {
+      state.isNewTaskModalOpen = action.payload;
     },
     setAccount: (state, action) => {
       state.account = action.payload;
@@ -37,7 +37,7 @@ export const appSlice = createSlice({
 });
 
 export const {
-  setDarkAppStyle,
+  setIsNewTaskModalOpen,
   setAccount,
   setTaskCount,
   addTask,

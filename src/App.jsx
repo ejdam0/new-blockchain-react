@@ -1,28 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { NewTaskModal } from 'components/NewTaskModal';
 import { TasksTable } from 'components/TasksTable';
 import React, { useEffect } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setIsNewTaskModalOpen } from 'store/AppReducer';
 import { fetchData } from './api/blockchainApi';
 import { Toolbar } from './components/Toolbar.jsx';
-import { addTask } from "./store/AppReducer";
 
 const App = () => {
-  const latestTaskIndex = useSelector((state) => state.appReducer.taskCount);
   const dispatch = useDispatch();
   useEffect(() => {
     fetchData(dispatch);
   }, []);
-
-  const handleAddNewTask = () => {
-    dispatch(addTask({
-      id: latestTaskIndex,
-      taskName: '',
-      progress: 0,
-      isDone: false,
-      isRecentlyCreated: true
-    }));
-  };
 
   return (
     <Container>
@@ -35,7 +25,7 @@ const App = () => {
         <Col>
           <Button
             style={{ marginTop: "5rem" }}
-            onClick={() => handleAddNewTask()}>
+            onClick={() => dispatch(setIsNewTaskModalOpen(true))}>
             Dodaj nowe zadanie
           </Button>
         </Col>
@@ -45,6 +35,7 @@ const App = () => {
           <TasksTable />
         </Col>
       </Row>
+      <NewTaskModal />
     </Container >
   );
 };

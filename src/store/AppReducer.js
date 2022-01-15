@@ -98,7 +98,6 @@ export const changeTaskProgress = (
 export const changeTaskCompletion = (dispatch, taskId, isDone, account) => {
   dispatch(toggleTaskCompletion({ id: taskId }));
   alterTaskCompletion(taskId, account);
-  console.log(isDone);
   if (isDone) {
     alterTaskProgress(taskId, 100, account);
     dispatch(updateTaskProgress({ id: taskId, progress: 100 }));
